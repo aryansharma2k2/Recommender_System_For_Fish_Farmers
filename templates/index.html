@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Fish Farming Recommender</title>
+    <style>
+        body {
+            background-color: #343a40; /* Dark background color */
+            color: #ffffff; /* Light text color */
+        }
+
+        .card {
+            background-color: #495057; /* Dark card background color */
+            border: 1px solid #495057; /* Dark border color */
+        }
+
+        .form-control,
+        .btn {
+            background-color: #343a40; /* Dark form control and button background color */
+            color: #ffffff; /* Light text color */
+        }
+    </style>
+
+    <script>
+        function generatePondFields() {
+            var numPonds = document.getElementById('num_ponds').value;
+            var pondFieldsContainer = document.getElementById('pond_fields_container');
+            pondFieldsContainer.innerHTML = ''; // Clear previous fields
+
+            for (var i = 1; i <= numPonds; i++) {
+                var div = document.createElement('div');
+                div.className = 'form-row';
+
+                // Length
+                var divLength = document.createElement('div');
+                divLength.className = 'form-group col-md-4';
+                var labelLength = document.createElement('label');
+                labelLength.innerHTML = 'Pond ' + i + ' - Length:(m)';
+                var inputLength = document.createElement('input');
+                inputLength.type = 'number';
+                inputLength.className = 'form-control';
+                inputLength.name = 'length_' + i;
+                inputLength.step = 'any';
+                inputLength.required = true;
+
+                // Breadth
+                var divBreadth = document.createElement('div');
+                divBreadth.className = 'form-group col-md-4';
+                var labelBreadth = document.createElement('label');
+                labelBreadth.innerHTML = 'Breadth:(m)';
+                var inputBreadth = document.createElement('input');
+                inputBreadth.type = 'number';
+                inputBreadth.className = 'form-control';
+                inputBreadth.name = 'breadth_' + i;
+                inputBreadth.step = 'any';
+                inputBreadth.required = true;
+
+                // Depth
+                var divDepth = document.createElement('div');
+                divDepth.className = 'form-group col-md-4';
+                var labelDepth = document.createElement('label');
+                labelDepth.innerHTML = 'Depth:(m)';
+                var inputDepth = document.createElement('input');
+                inputDepth.type = 'number';
+                inputDepth.className = 'form-control';
+                inputDepth.name = 'depth_' + i;
+                inputDepth.step = 'any';
+                inputDepth.required = true;
+
+                // Append elements
+                divLength.appendChild(labelLength);
+                divLength.appendChild(inputLength);
+                divBreadth.appendChild(labelBreadth);
+                divBreadth.appendChild(inputBreadth);
+                divDepth.appendChild(labelDepth);
+                divDepth.appendChild(inputDepth);
+
+                div.appendChild(divLength);
+                div.appendChild(divBreadth);
+                div.appendChild(divDepth);
+
+                pondFieldsContainer.appendChild(div);
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title text-center">Fish Farming Recommender</h2>
+                <form action="/result" method="post">
+                    <!-- Input fields for number of ponds -->
+                    <div class="form-group">
+                        <label for="num_ponds">Enter the number of ponds:</label>
+                        <input type="number" class="form-control" id="num_ponds" name="num_ponds" required
+                            oninput="generatePondFields()">
+                    </div>
+
+                    <!-- Container for dynamically generated pond fields -->
+                    <div id="pond_fields_container"></div>
+
+                    <!-- Input fields for latitude and longitude -->
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="farmer_lat">Enter your latitude:</label>
+                            <input type="number" class="form-control" name="farmer_lat" step="any" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="farmer_lon">Enter your longitude:</label>
+                            <input type="number" class="form-control" name="farmer_lon" step="any" required>
+                        </div>
+                    </div>
+
+                    <!-- Additional input fields -->
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="truck_capacity">Truck capacity(tonnes):</label>
+                            <input type="number" class="form-control" name="truck_capacity" step="any" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="ph">pH:</label>
+                            <input type="number" class="form-control" name="ph" step="any" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="dissolved_oxygen">Dissolved oxygen(mg/L):</label>
+                            <input type="number" class="form-control" name="dissolved_oxygen" step="any" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="salinity">Salinity(ppt):</label>
+                            <input type="number" class="form-control" name="salinity" step="any" required>
+                        </div>
+                    </div>
+
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary btn-block">Get Recommendations</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Recommendations</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 30px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #ffffff;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Final Recommendations for Each Pond</h1>
+
+    {% if ponddata %}
+        <ul>
+            {% for i in range(ponddata|length) %}
+                <li>
+                    <h2>Pond {{ i + 1 }}</h2>
+                    <p>Revenue: {{ revenue[i] }}</p>
+                    <p>Fish Species: {{ ponddata[i][0] }}</p>
+                    <p>Number of Fish: {{ fishes_per_pond[i] }}</p>
+                    <p>Feeding Cost: {{ feeding_costs[i]['Total Cost'] }} rupees</p>
+                    <p>Harvest Cost: {{ harvest_costs[i] }} rupees</p>
+                    <p>Chemical Cost: {{ total_chemical_cost }} rupees</p>
+                    <p>Logistics Cost: {{ logistics_costs }}</p>
+                    <p>Total Final Cost: {{ total_finalcost }} rupees</p>
+                    <p>Profit: {{ profit  }} rupees</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No recommendations available.</p>
+    {% endif %}
+
+    <a href="/">Back to Home</a>
+</body>
+</html>
